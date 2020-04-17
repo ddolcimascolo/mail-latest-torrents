@@ -1,0 +1,26 @@
+doctype html
+html
+    head
+        style(type="text/css").
+            .list tr > * { text-align: left; }
+            .list tr > *:first-child { padding-right: 5px; }
+            .list tr > *:last-child { padding-left: 5px; }
+            .list tr > *:not(:last-child):not(:first-child) { padding: 0 5px; }
+            .list tr { padding: 5px 0; }
+            .right { text-align: right; }
+    body
+        div.right
+            a(href=process.env.RUTORRENT_URL)= process.env.RUTORRENT_URL
+        table.list
+            thead
+                tr
+                    th Nom
+                    th Taille
+                    th Utilisateur
+            tbody
+            each torrent in torrents
+                tr
+                    td= torrent[4]
+                    td= bytes.format(+torrent[5])
+                    td= torrent[14]
+
