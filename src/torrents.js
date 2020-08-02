@@ -17,12 +17,12 @@ module.exports = function fetchTorrents(limit) {
     data: buildSearchParams(),
     auth: {
       username: process.env.RUTORRENT_USERNAME,
-      password: process.env.RUTORRENT_PASSWORD,
-    },
+      password: process.env.RUTORRENT_PASSWORD
+    }
   })
     .then(_.property('data.t'))
     .then(_.values)
-    .then((torrents) => _.sortBy(torrents, _.last)) // Last item is the custom "addtime"
+    .then(torrents => _.sortBy(torrents, _.last)) // Last item is the custom "addtime"
     .then(_.reverse)
-    .then((torrents) => _.slice(torrents, 0, limit));
+    .then(torrents => _.slice(torrents, 0, limit));
 };

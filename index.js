@@ -8,4 +8,4 @@ const os = require('os'),
 require('dotenv').config();
 
 fetchTorrents(process.env.RUTORRENT_LIMIT || 10)
-  .then((torrents) => sendEmail('torrents', { os, process, torrents, bytes }));
+  .then(torrents => sendEmail('torrents', { os, process, torrents, bytes }));
