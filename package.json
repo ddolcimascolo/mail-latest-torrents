@@ -16,7 +16,7 @@
     "email-templates": "7.1.0",
     "lodash": "4.17.19",
     "nodemailer": "6.4.11",
-    "pug": "3.0.0"
+    "pug": "3.0.1"
   },
   "devDependencies": {
     "@stordata/eslint-config": "0.0.3",
