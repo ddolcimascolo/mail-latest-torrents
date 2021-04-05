@@ -17,10 +17,11 @@ html
                     th Nom
                     th Taille
                     th Utilisateur
+                    th Ajouté le
             tbody
             each torrent in torrents
                 tr
-                    td= torrent[4]
-                    td= bytes.format(+torrent[5])
-                    td= torrent[14]
-
+                    td= torrent.name
+                    td= bytes.format(torrent.size)
+                    td= torrent.user
+                    td= DateTime.fromSeconds(torrent.date).toFormat('dd/MM/yy HH:mm')

@@ -3,7 +3,7 @@
 const axios = require('axios'),
       _ = require('lodash');
 
-module.exports = function fetchTorrents(limit) {
+module.exports = function fetchTorrents(dateOfLatestKnownTorrent) {
   function buildSearchParams() {
     const params = new URLSearchParams();
 
@@ -20,9 +20,8 @@ module.exports = function fetchTorrents(limit) {
       password: process.env.RUTORRENT_PASSWORD
     }
   })
-    .then(_.property('data.t'))
-    .then(_.values)
-    .then(torrents => _.sortBy(torrents, _.last)) // Last item is the custom "addtime"
-    .then(_.reverse)
-    .then(torrents => _.slice(torrents, 0, limit));
+    .then(res => res.data.t)
+    .then(torrents => _.map(torrents, props => ({ date: +_.last(props), name: props[4], size: +props[5], user: props[14] })))
+    .then(torrents => _.orderBy(torrents, 'date', ['desc'])) // Last item is the custom "addtime"
+    .then(torrents => torrents.filter(({ date }) => date > dateOfLatestKnownTorrent));
 };
